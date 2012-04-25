@@ -22,7 +22,7 @@
 
 #We set a destination where everything gets installed.
 
-PREFIX=$(pwd)/playbook_prefix
+PREFIX=$(pwd)/../install
 
 # You might choose to run this if you change something 
 # in the build scripts.  We comment it out. 
@@ -35,11 +35,11 @@ PREFIX=$(pwd)/playbook_prefix
 
 RANLIB="${QNX_HOST}/usr/bin/ntoarmv7-ranlib " \
 CPP="${QNX_HOST}/usr/bin/qcc -V4.4.2,gcc_ntoarmv7le_cpp -E " \
-CC="${QNX_HOST}/usr/bin/qcc -V4.4.2,gcc_ntoarmv7le_cpp " \
+CC="${PREFIX}/../porting-utils/bin/qcc" \
 LD="${QNX_HOST}/usr/bin/ntoarmv7-ld " \
 CPPFLAGS="-D__PLAYBOOK__ -D__QNXNTO__ -I $(pwd)/../TouchControlOverlay/public " \
 CFLAGS=" -g " \
-LDFLAGS="-L$(pwd)/../TouchControlOverlay/Device-Debug -lTouchControlOverlay -L${QNX_TARGET}/armle-v7/lib -L${PREFIX}/lib -lscreen -lasound -lpps -lm -lpng14 -lbps -lxml2 -lEGL -lGLESv2" \
+LDFLAGS="-L$(pwd)/../TouchControlOverlay/Device-Release -lTouchControlOverlay -L${QNX_TARGET}/armle-v7/lib -L${PREFIX}/lib -lscreen -lasound -lpps -lm -lpng14 -lbps -lxml2 -lEGL -lGLESv2" \
 PKG_CONFIG_PATH=${PREFIX}/lib/pkgconfig \
 PKG_CONFIG_LIBDIR=${PREFIX}/lib/pkgconfig \
 ./configure --prefix="${PREFIX}" \
@@ -64,10 +64,10 @@ cd test
 
 RANLIB="${QNX_HOST}/usr/bin/ntoarmv7-ranlib " \
 CPP="${QNX_HOST}/usr/bin/qcc -V4.4.2,gcc_ntoarmv7le_cpp -E " \
-CC="${QNX_HOST}/usr/bin/qcc -V4.4.2,gcc_ntoarmv7le_cpp " \
+CC="${PREFIX}/../porting-utils/bin/qcc" \
 LD="${QNX_HOST}/usr/bin/ntoarmv7-ld " \
 CFLAGS="-g -D__PLAYBOOK__ -D__QNXNTO__ -I ${PREFIX}/include " \
-LIBS="-L$(pwd)/../../TouchControlOverlay/Device-Debug -lTouchControlOverlay -L${QNX_TARGET}/armle-v7/lib -L${PREFIX}/lib -lscreen -lasound -lpps -lm -lpng14 -lbps -lxml2  -lEGL -lGLESv2 " \
+LIBS="-L$(pwd)/../../TouchControlOverlay/Device-Release -lTouchControlOverlay -L${QNX_TARGET}/armle-v7/lib -L${PREFIX}/lib -lscreen -lasound -lpps -lm -lpng14 -lbps -lxml2  -lEGL -lGLESv2 " \
 PKG_CONFIG_PATH=${PREFIX}/lib/pkgconfig \
 PKG_CONFIG_LIBDIR=${PREFIX}/lib/pkgconfig \
 ./configure --prefix="${PREFIX}" \
